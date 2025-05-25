@@ -4,11 +4,6 @@ The described technique is using some undocumented capabilities, everything is p
 ### Motivation
 SSH keys are super annoying to maintain, they sprawl around, sent and received all over emails, slack channels and whatnot. It would be great if SSH access could be managed in a better way.
 
-### The Better Way (if you can access a chosen repo => you can SSH to the host)
-The next time you will SSH to the host (without key file), you will see the following banner:
-
-![Github SSH Access Control Example](https://i.imgur.com/SKik3YO.png)
-
 Following the instructions in the banner, which you'll only be able to complete if you have access to the repo, would give you a temporary token that can be used as a password for the SSH completion.
 
 ### How To Enable
@@ -34,7 +29,3 @@ Basically, when you click "Raw" on a private repo file on Github, you'll be redi
 Why Github? Github repo access is granular and can be easily gated with any SSO provider and Github are rather trusted in securely handling sensitive access tokens.
 
 So the complete flow is pam-oauth2 SSH module performing curl "raw.githubusercontent.com/[REPO]/main/access.json?token=[PASSWORD]" expecting to get a JSON response that has a key-value of the username used. This will only work if the password provided is a valid access token.
-
-You can see the code here: [tinyurl.com/githubsshinit](https://tinyurl.com/githubsshinit), or on this repo: [shaylevi2/githubssh](https://github.com/shaylevi2/githubssh).
-
-I think this is pretty cool!
